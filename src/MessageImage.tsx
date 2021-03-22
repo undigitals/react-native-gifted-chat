@@ -66,19 +66,20 @@ export default class MessageImage<
       imageProps,
       imageStyle,
       currentMessage,
+      multipleImages
     } = this.props
     if (!!currentMessage) {
-      if(currentMessage.multipleImages){
+      if(multipleImages?.length > 1){
         const renderMultipleImage = (props) => (
           <View style={[styles.container, containerStyle]}>
             <Lightbox activeProps={{style: styles.imageActive,}} {...lightboxProps}>
-                <Image {...imageProps} style={[styles.image, imageStyle]} source={{ uri: props.item.image }}/>
+                <Image {...imageProps} style={[styles.image, imageStyle]} source={{ uri: props?.item?.Media }}/>
             </Lightbox>
           </View>
         )
         return (
           <FlatList 
-            data={currentMessage.multipleImages}
+            data={multipleImages}
             renderItem={(item) => renderMultipleImage(item)}
             keyExtractor={item => item.id}
           />
